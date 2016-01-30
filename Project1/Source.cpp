@@ -1,7 +1,101 @@
 #include <iostream>
 using namespace std;
 
-int main(){
-	
+class webAddressInfo {
+private:
+	char url[201]; //allow a maximum of 200 characters
+public:
+	webAddressInfo();
+	webAddressInfo(char* inputString);
+	void setWebAddressInfo(char* inputString);
+	char* getWebAddressInfo();
+	void display();
+};
+
+class browserTab {
+protected:
+	int numAddress; //Current number of web addresses in this tab
+	webAddressInfo webAddresses[20]; //Web addreses in this tab
+	int currentAddress; //index of current location in webAddresses
+						// other private methods if necessary for this class
+public:
+	browserTab();
+	browserTab(char* inputString); //creates a new tab with the inputString
+	webAddressInfo& forward();
+	webAddressInfo& backward();
+	void addAddress(char* inputString);
+	void display();
+	// and other public methods if necessary
+};
+
+webAddressInfo::webAddressInfo() {
 }
-			
+
+webAddressInfo::webAddressInfo(char * inputString) {
+}
+
+void webAddressInfo::setWebAddressInfo(char * inputString) {
+}
+
+char * webAddressInfo::getWebAddressInfo() {
+	return nullptr;
+}
+
+void webAddressInfo::display() {
+}
+
+browserTab::browserTab() {
+}
+
+browserTab::browserTab(char * inputString) {
+}
+
+webAddressInfo & browserTab::forward() {
+	webAddressInfo a = webAddressInfo();
+	return a;
+}
+
+webAddressInfo & browserTab::backward() {
+	webAddressInfo a = webAddressInfo();
+	return a;
+}
+
+void browserTab::addAddress(char * inputString) {
+}
+
+void browserTab::display() {
+	cout << numAddress << endl;
+}
+int main() {
+	char buffer[256];
+	browserTab myTabs[20];
+	int tabNumber;
+	char c;
+	char blank = ' ';
+	char action;
+
+	while (!cin.eof()){ // while end of line is not reached
+
+			cin >> tabNumber;
+			cin.get(blank);
+			cin.get(action);
+			switch (action) {
+				case 'N': {
+					cout << "new tab" << endl; 
+				}
+				case 'F': {
+					cout << "forward" << endl;
+				}
+				case 'B': {
+					cout << "backward" << endl;
+				}
+				case 'P': {
+					cout << "print" << endl;
+				}
+				default: {
+					cout << c << "and " << action << endl;
+				}
+			}
+	}
+	return 0;
+}
