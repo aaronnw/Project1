@@ -66,36 +66,49 @@ void browserTab::addAddress(char * inputString) {
 void browserTab::display() {
 	cout << numAddress << endl;
 }
+
 int main() {
-	char buffer[256];
 	browserTab myTabs[20];
 	int tabNumber;
+	int i;
 	char c;
 	char blank = ' ';
 	char action;
 
-	while (!cin.eof()){ // while end of line is not reached
+	while (!cin.eof()) { // while end of line is not reached
 
-			cin >> tabNumber;
+		cin >> tabNumber;
+		cin.get(blank);
+		cin.get(action);
+		char webAddress[201]; //OG: strEmpty(webAddress, 201);
+		switch (action) {
+		case 'N': {
 			cin.get(blank);
-			cin.get(action);
-			switch (action) {
-				case 'N': {
-					cout << "new tab" << endl; 
+			i = 0;
+			do {
+				cin.get(c);
+				if (c != '\n') {
+					webAddress[i++] = c;
 				}
-				case 'F': {
-					cout << "forward" << endl;
-				}
-				case 'B': {
-					cout << "backward" << endl;
-				}
-				case 'P': {
-					cout << "print" << endl;
-				}
-				default: {
-					cout << c << "and " << action << endl;
-				}
+			} while ((c != '\n') && (i < 201) && !cin.eof());
+			for (int j = 0; j < i; j++) {
+				cout << webAddress[j];
 			}
+			cout << endl;
+		}
+		case 'F': {
+			cout << "forward" << endl;
+		}
+		case 'B': {
+			cout << "backward" << endl;
+		}
+		case 'P': {
+			cout << "print" << endl;
+		}
+		default: {
+		}
+		}
+		return 0;
+
 	}
-	return 0;
 }
