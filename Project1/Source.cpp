@@ -31,7 +31,7 @@ public:
 webAddressInfo::webAddressInfo() {
 }
 
-webAddressInfo::webAddressInfo(char * inputString) {
+webAddressInfo::webAddressInfo(char* inputString) {
 }
 
 void webAddressInfo::setWebAddressInfo(char * inputString) {
@@ -82,33 +82,43 @@ int main() {
 		cin.get(action);
 		char webAddress[201]; //OG: strEmpty(webAddress, 201);
 		switch (action) {
-		case 'N': {
+		case 'N':{
 			cin.get(blank);
 			i = 0;
 			do {
 				cin.get(c);
 				if (c != '\n') {
 					webAddress[i++] = c;
+					webAddressInfo(webAddress);
+					//Add the address info to the browser tab list
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
 			for (int j = 0; j < i; j++) {
 				cout << webAddress[j];
 			}
 			cout << endl;
+			break;
 		}
+				 
 		case 'F': {
 			cout << "forward" << endl;
+			break;
 		}
+				 
 		case 'B': {
 			cout << "backward" << endl;
+			break;
 		}
+				  
 		case 'P': {
-			cout << "print" << endl;
+			if (!cin.eof()) cout << "print" << endl;
+			break;
 		}
+				 
 		default: {
 		}
 		}
-		return 0;
 
 	}
+	return 0;
 }
