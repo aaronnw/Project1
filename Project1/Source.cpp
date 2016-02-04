@@ -1,6 +1,11 @@
 #include <iostream>
 using namespace std;
 
+void strEmpty(char* someStr, int length) {
+	for (int i = 0; i < length; i++) {
+		someStr[i] = '\0';
+	}
+}
 class webAddressInfo {
 private:
 	char url[201]; //allow a maximum of 200 characters
@@ -47,15 +52,15 @@ void webAddressInfo::display() {
 browserTab::browserTab() {
 }
 
-browserTab::browserTab(char * inputString) {
+browserTab::browserTab(char* inputString) {
 }
 
-webAddressInfo & browserTab::forward() {
+webAddressInfo& browserTab::forward() {
 	webAddressInfo a = webAddressInfo();
 	return a;
 }
 
-webAddressInfo & browserTab::backward() {
+webAddressInfo& browserTab::backward() {
 	webAddressInfo a = webAddressInfo();
 	return a;
 }
@@ -69,8 +74,9 @@ void browserTab::display() {
 
 int main() {
 	browserTab myTabs[20];
-	int tabNumber;
+	int tabNumber = 0;
 	int i;
+	char webAddress[201];
 	char c;
 	char blank = ' ';
 	char action;
@@ -80,41 +86,37 @@ int main() {
 		cin >> tabNumber;
 		cin.get(blank);
 		cin.get(action);
-		char webAddress[201]; //OG: strEmpty(webAddress, 201);
+		strEmpty(webAddress, 201);
 		switch (action) {
-		case 'N':{
+		case 'N': {
 			cin.get(blank);
 			i = 0;
 			do {
 				cin.get(c);
 				if (c != '\n') {
 					webAddress[i++] = c;
-					webAddressInfo(webAddress);
-					//Add the address info to the browser tab list
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
-			for (int j = 0; j < i; j++) {
-				cout << webAddress[j];
-			}
+			webAddressInfo info = webAddressInfo(webAddress);
 			cout << endl;
 			break;
 		}
-				 
+
 		case 'F': {
 			cout << "forward" << endl;
 			break;
 		}
-				 
+
 		case 'B': {
 			cout << "backward" << endl;
 			break;
 		}
-				  
+
 		case 'P': {
 			if (!cin.eof()) cout << "print" << endl;
 			break;
 		}
-				 
+
 		default: {
 		}
 		}
