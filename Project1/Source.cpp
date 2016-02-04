@@ -37,16 +37,29 @@ webAddressInfo::webAddressInfo() {
 }
 
 webAddressInfo::webAddressInfo(char* inputString) {
+	int i = 0;
+	while (inputString[i] != '\0') {
+		url[i] = inputString[i];
+	}
 }
 
 void webAddressInfo::setWebAddressInfo(char * inputString) {
+	int i = 0;
+	while (inputString[i] != '\0') {
+		url[i] = inputString[i];
+	}
 }
 
 char * webAddressInfo::getWebAddressInfo() {
-	return nullptr;
+	return url;
 }
 
 void webAddressInfo::display() {
+	int i = 0;
+	while (url[i] != '\0') {
+		cout << url[i];
+	}
+	cout << endl;
 }
 
 browserTab::browserTab() {
