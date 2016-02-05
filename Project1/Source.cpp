@@ -69,7 +69,7 @@ void browserTab::addAddress(char * inputString) {
 }
 
 void browserTab::display() {
-	cout << numAddress << endl;
+	webAddresses[currentAddress].display();
 }
 
 int main() {
@@ -81,7 +81,7 @@ int main() {
 	char blank = ' ';
 	char action;
 
-	while (!cin.eof()) { // while end of line is not reached
+	while (!cin.eof()) { // while end of file is not reached
 
 		cin >> tabNumber;
 		cin.get(blank);
@@ -98,7 +98,7 @@ int main() {
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
 			webAddressInfo info = webAddressInfo(webAddress);
-			cout << endl;
+			myTabs[tabNumber] = browserTab(webAddress);
 			break;
 		}
 
@@ -113,7 +113,7 @@ int main() {
 		}
 
 		case 'P': {
-			if (!cin.eof()) cout << "print" << endl;
+			//if its not the end print the info
 			break;
 		}
 
