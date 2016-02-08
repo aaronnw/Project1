@@ -62,7 +62,6 @@ void webAddressInfo::display() {
 		cout << url[i];
 		i++;
 	}
-	cout << endl;
 }
 
 browserTab::browserTab() {
@@ -102,7 +101,9 @@ void browserTab::addAddress(char* inputString) {
 }
 
 void browserTab::display() {
-	webAddresses[currentAddress].display();
+	for (int i = 0; i < numAddress; i++) {
+		webAddresses[i].display();
+	}
 }
 
 int main() {
@@ -129,9 +130,9 @@ int main() {
 					webAddress[i++] = c;
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
-			webAddressInfo* info = new webAddressInfo(webAddress);
+			new webAddressInfo(webAddress);
 			myTabs[tabNumber].addAddress(webAddress);
-			cout << tabNumber << " " << action << " " << webAddress << endl;
+			cout << tabNumber << " " << action << " " << webAddress;
 			break;
 		}
 
@@ -147,6 +148,7 @@ int main() {
 			if (!cin.eof()) {
 				cout << tabNumber << " " << action << " ";
 				myTabs[tabNumber].backward().display();
+
 			}
 			break;
 		}
@@ -162,6 +164,7 @@ int main() {
 		default: {
 		}
 		}
+		cout << endl;
 
 	}
 	return 0;
