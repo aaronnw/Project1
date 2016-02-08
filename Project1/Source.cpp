@@ -38,8 +38,10 @@ webAddressInfo::webAddressInfo() {
 
 webAddressInfo::webAddressInfo(char* inputString) {
 	int i = 0;
+	strEmpty(url, 201);
 	while (inputString[i] != '\0') {
 		url[i] = inputString[i];
+		i++;
 	}
 }
 
@@ -50,7 +52,7 @@ void webAddressInfo::setWebAddressInfo(char * inputString) {
 	}
 }
 
-char * webAddressInfo::getWebAddressInfo() {
+char* webAddressInfo::getWebAddressInfo() {
 	return url;
 }
 
@@ -58,27 +60,45 @@ void webAddressInfo::display() {
 	int i = 0;
 	while (url[i] != '\0') {
 		cout << url[i];
+		i++;
 	}
 	cout << endl;
 }
 
 browserTab::browserTab() {
+	numAddress = 0;
 }
 
 browserTab::browserTab(char* inputString) {
+	numAddress = 1;
+	webAddresses[numAddress - 1] = webAddressInfo(inputString);
+	currentAddress = numAddress - 1;
 }
 
 webAddressInfo& browserTab::forward() {
-	webAddressInfo a = webAddressInfo();
-	return a;
+	if ((currentAddress + 1) < numAddress) {
+		return webAddresses[currentAddress + 1];
+	}
+	else {
+		return webAddresses[currentAddress];
+	}
 }
 
 webAddressInfo& browserTab::backward() {
-	webAddressInfo a = webAddressInfo();
-	return a;
+	if (currentAddress > 0) {
+		return webAddresses[currentAddress - 1];
+	}
+	else {
+		return webAddresses[currentAddress];
+	}
 }
 
-void browserTab::addAddress(char * inputString) {
+void browserTab::addAddress(char* inputString) {
+	numAddress++;
+	webAddresses[numAddress - 1] = webAddressInfo(inputString);
+	currentAddress = numAddress - 1;
+
+
 }
 
 void browserTab::display() {
@@ -110,23 +130,36 @@ int main() {
 					webAddress[i++] = c;
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
-			webAddressInfo info = webAddressInfo(webAddress);
-			myTabs[tabNumber] = browserTab(webAddress);
+			webAddressInfo* info = new webAddressInfo(webAddress);
+			//If the browser tab does not exist create a new one
+			//Instead of this could just create all tabs and update info for each
+			if (myTabs[tabNumber]) {
+
+			}
+			//TODO
+			// IF browser tab does not exist, make a new one
+			// BUT IF browser tab exists, just add new address info to the same tab and do NOT replace the object
+			myTabs[tabNumber] = *new browserTab(webAddress);
+			cout << tabNumber << " " << action << " " << webAddress << endl;
 			break;
 		}
 
 		case 'F': {
-			cout << "forward" << endl;
+
+			cout << tabNumber << " " << action << " ";
+			myTabs[tabNumber].forward().display();
 			break;
 		}
 
 		case 'B': {
-			cout << "backward" << endl;
+			cout << tabNumber << " " << action << " ";
+			myTabs[tabNumber].backward();
 			break;
 		}
 
 		case 'P': {
-			//if its not the end print the info
+			cout << tabNumber << " " << action << " ";
+			myTabs[tabNumber].display();
 			break;
 		}
 
