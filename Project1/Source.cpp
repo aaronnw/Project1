@@ -101,8 +101,6 @@ void browserTab::addAddress(char* inputString) {
 	numAddress++;
 	webAddresses[numAddress - 1] = webAddressInfo(inputString);
 	currentAddress = numAddress - 1;
-
-
 }
 ///Displays all the addresses contained in a tab
 void browserTab::display() {
@@ -119,8 +117,8 @@ int main() {
 	char c;
 	char blank = ' ';
 	char action;
-
-	while (!cin.eof()) { // while end of file is not reached
+	// while end of file is not reached
+	while (!cin.eof()) {
 		//Read in the first characters
 		cin >> tabNumber;
 		cin.get(blank);
@@ -133,6 +131,7 @@ int main() {
 			do {
 				cin.get(c);
 				if (c != '\n') {
+					webAddress[i++] = c;
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
 			new webAddressInfo(webAddress);
