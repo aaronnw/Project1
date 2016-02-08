@@ -122,7 +122,6 @@ int main() {
 		strEmpty(webAddress, 201);
 		switch (action) {
 		case 'N': {
-			cin.get(blank);
 			i = 0;
 			do {
 				cin.get(c);
@@ -131,35 +130,32 @@ int main() {
 				}
 			} while ((c != '\n') && (i < 201) && !cin.eof());
 			webAddressInfo* info = new webAddressInfo(webAddress);
-			//If the browser tab does not exist create a new one
-			//Instead of this could just create all tabs and update info for each
-			if (myTabs[tabNumber]) {
-
-			}
-			//TODO
-			// IF browser tab does not exist, make a new one
-			// BUT IF browser tab exists, just add new address info to the same tab and do NOT replace the object
-			myTabs[tabNumber] = *new browserTab(webAddress);
+			myTabs[tabNumber].addAddress(webAddress);
 			cout << tabNumber << " " << action << " " << webAddress << endl;
 			break;
 		}
 
 		case 'F': {
-
-			cout << tabNumber << " " << action << " ";
-			myTabs[tabNumber].forward().display();
+			if (!cin.eof()) {
+				cout << tabNumber << " " << action << " ";
+				myTabs[tabNumber].forward().display();
+			}
 			break;
 		}
 
 		case 'B': {
-			cout << tabNumber << " " << action << " ";
-			myTabs[tabNumber].backward();
+			if (!cin.eof()) {
+				cout << tabNumber << " " << action << " ";
+				myTabs[tabNumber].backward().display();
+			}
 			break;
 		}
 
 		case 'P': {
-			cout << tabNumber << " " << action << " ";
-			myTabs[tabNumber].display();
+			if (!cin.eof()) {
+				cout << tabNumber << " " << action << " ";
+				myTabs[tabNumber].display();
+			}
 			break;
 		}
 
